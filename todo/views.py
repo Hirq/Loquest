@@ -9,8 +9,8 @@ import datetime
 from .models import Quest, Choice
 from .forms import QuestForm, LogForm
 
-def index(request):
-    return HttpResponse("Halo")
+def about(request):
+    return render(request, 'todo/about.html')
 
 class IndexView(generic.ListView):
     template_name = 'todo/index.html'
@@ -43,7 +43,7 @@ def new_quest(request):
 
 def new_log(request, quest_id):
     quest1 = get_object_or_404(Quest, pk=quest_id)
-
+    quest_text = quest1.quest_text
 
     if request.method == "POST":
         form = LogForm(request.POST)
@@ -55,7 +55,7 @@ def new_log(request, quest_id):
     else:
         form = LogForm(initial={'choice_text': 'example text', 'quest': quest1})
 
-    return render(request, 'todo/choice_form.html', {'form': form})
+    return render(request, 'todo/choice_form.html', {'form': form, 'quest_text': quest_text})
 
 
 class QuestDelete(DeleteView):

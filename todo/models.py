@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.utils import timezone
 class Quest(models.Model):
 
-    quest_name = models.CharField(max_length=200, default='Quest')
-    quest_text = models.TextField(max_length=200)
+    quest_name = models.CharField(max_length=400, default='Quest')
+    quest_text = models.TextField(max_length=2100)
     pub_date = models.DateTimeField('date published')
 
     def get_absolute_url(self):
@@ -18,7 +18,7 @@ class Quest(models.Model):
 
 class Choice(models.Model):
     quest = models.ForeignKey(Quest, on_delete=models.CASCADE, null=True)
-    choice_text = models.CharField(max_length=200)
+    choice_text = models.TextField(max_length=2100)
 
     def get_absolute_url(self):
         return reverse('todo:index')
