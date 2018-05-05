@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/style_index.css' %}" />
+</head>
+<body>
+<div class="container">
+<form action="{% url 'todo:create_quest' %}" method="post">{% csrf_token %}
+
+    <input type="submit" class="btn btn-warning" value="New Quest"/>
+</form>
+
+    <p class="test1">List of Quests</p>
+
+    {% if list %}
+    <ul>
+    {% for quest in list %}
+       <li><a href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
+    {% endfor %}
+    </ul>
+
+
+{% else %}
+
+{% endif %}
+</div>
+</body>
+</html>

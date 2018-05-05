@@ -1,0 +1,22 @@
+body {
+    background-color: darkviolet;
+}
+
+
+.container {
+    max-width: 100%;
+    margin-top: 2%;
+
+    padding-left: 30%;
+    padding-right: 30%;
+    word-wrap: break-word
+}
+
+.add_log {
+    margin-left: 40%;
+}
+
+#delete_quest {
+    display: inline-block;
+    float: right;
+}
