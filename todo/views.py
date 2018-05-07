@@ -44,6 +44,7 @@ def new_quest(request):
 def new_log(request, quest_id):
     quest1 = get_object_or_404(Quest, pk=quest_id)
     quest_text = quest1.quest_text
+    # quest_level = quest1.level
 
     if request.method == "POST":
         form = LogForm(request.POST)

@@ -5,7 +5,7 @@ class QuestForm(forms.ModelForm):
 
     class Meta:
         model = Quest
-        fields = ['quest_name', 'quest_text']
+        fields = ['quest_name', 'quest_text', 'levels']
 
 
 class LogForm(forms.ModelForm):

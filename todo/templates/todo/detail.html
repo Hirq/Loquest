@@ -4,7 +4,7 @@
         <h3>Quest: {{ quest.quest_name }} </h3>
         <h5>When: {{ quest.pub_date }}</h5>
         <h4>Text: {{ quest.quest_text }}</h4>
-
+        <h5>Level: {{ quest.levels }}</h5>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}

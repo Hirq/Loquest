@@ -8,7 +8,7 @@ class ChoiceInline(admin.StackedInline):
 
 
 class QuestAdmin(admin.ModelAdmin):
-    fields = ['pub_date', 'quest_name', 'quest_text']
+    fields = ['pub_date', 'quest_name', 'quest_text', 'levels']
     inlines = [ChoiceInline]
 
 admin.site.register(Quest, QuestAdmin)
