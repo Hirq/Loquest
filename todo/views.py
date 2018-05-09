@@ -44,19 +44,20 @@ def new_quest(request):
 def new_log(request, quest_id):
     quest1 = get_object_or_404(Quest, pk=quest_id)
     quest_text = quest1.quest_text
-    # quest_level = quest1.level
+    quest_name = quest1.quest_name
 
     if request.method == "POST":
         form = LogForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            post.quest = quest1
             post.save()
             return redirect('todo:index')
 
     else:
-        form = LogForm(initial={'choice_text': 'example text', 'quest': quest1})
+        form = LogForm(initial={'choice_text': 'example text'})
 
-    return render(request, 'todo/choice_form.html', {'form': form, 'quest_text': quest_text})
+    return render(request, 'todo/choice_form.html', {'quest_name': quest_name, 'form': form, 'quest_text': quest_text})
 
 
 class QuestDelete(DeleteView):

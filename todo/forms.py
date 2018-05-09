@@ -12,5 +12,5 @@ class LogForm(forms.ModelForm):
 
     class Meta:
         model = Choice
-        fields = ['quest', 'choice_text']
+        fields = ['choice_text']
 

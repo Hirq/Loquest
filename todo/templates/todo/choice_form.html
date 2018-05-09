@@ -2,8 +2,8 @@
 
 {% block content %}
     <div class="container">
-
-        <h1>New Log</h1>
+        <h1>Quest: {{ quest_name }}</h1>
+        <h2>New Log</h2>
         <form method="POST" class="post-form">{% csrf_token %}
             {{ form.as_p }}
             <button class="btn btn-warning" type="submit">Add log</button>
