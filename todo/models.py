@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from django.utils import timezone
+from django.conf import settings
+from django.contrib.auth.models import User
+
 class Quest(models.Model):
 
 
@@ -13,7 +15,7 @@ class Quest(models.Model):
         (MIDDLE, 'MIDDLE'),
         (HARD, 'HARD'),
     )
-
+    who = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     quest_name = models.CharField(max_length=400, default='Quest')
     quest_text = models.TextField(max_length=2100)
     pub_date = models.DateTimeField('date published', default="")

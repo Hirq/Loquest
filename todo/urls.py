@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('quest_form', views.new_quest, name='create_quest'),
     path('<int:quest_id>/choice_form/', views.new_log, name='create_log'),
-    path('<int:pk>/quest_confirm_delete/', views.QuestDelete.as_view(), name='quest_confirm_delete'),
-    path('about', views.about, name='about')
+    path('<int:pk>/quest_confirm_delete/', views.QuestDelete, name='quest_confirm_delete'),
+    path('about', views.about, name='about'),
+    # path('<int:quest_id>/done_quest', views.DoneQuest, name='done_quest')
 ]

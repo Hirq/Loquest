@@ -29,12 +29,17 @@ class DetailView(generic.DetailView):
         return redirect('todo:index')
 
 def new_quest(request):
+    current_user = request.user
+
+
     if request.method == "POST":
         form = QuestForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.pub_date = timezone.now()
+            post.who = current_user
             post.save()
+
             return redirect('todo:index')
     else:
         form = QuestForm()
@@ -45,6 +50,7 @@ def new_log(request, quest_id):
     quest1 = get_object_or_404(Quest, pk=quest_id)
     quest_text = quest1.quest_text
     quest_name = quest1.quest_name
+    who_add = quest1.who
 
     if request.method == "POST":
         form = LogForm(request.POST)
@@ -57,9 +63,14 @@ def new_log(request, quest_id):
     else:
         form = LogForm(initial={'choice_text': 'example text'})
 
-    return render(request, 'todo/choice_form.html', {'quest_name': quest_name, 'form': form, 'quest_text': quest_text})
+    return render(request, 'todo/choice_form.html', {'who': who_add, 'quest_name': quest_name, 'form': form, 'quest_text': quest_text})
 
 
 class QuestDelete(DeleteView):
     model = Quest
     success_url = reverse_lazy('todo:index')
+
+# class DoneQuest(UpdateView):
+#     model = Quest
+#     fields = ['quest_name']
+#     template_name_suffix = '_update_form'

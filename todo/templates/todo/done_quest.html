@@ -1,0 +1,14 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+
+    <div class="container">
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update" />
+            <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>
+
+        </form>
+    </div>
+
+
+{% endblock %}

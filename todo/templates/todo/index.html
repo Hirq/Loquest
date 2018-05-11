@@ -17,10 +17,13 @@
                 {% elif quest.levels == "HARD" %}
                    <li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
                 {% endif %}
+
+
             {% endfor %}
             </ul>
         {% else %}
 
         {% endif %}
     </div>
+
 {% endblock content %}
