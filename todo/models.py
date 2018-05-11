@@ -20,6 +20,7 @@ class Quest(models.Model):
     quest_text = models.TextField(max_length=2100)
     pub_date = models.DateTimeField('date published', default="")
     levels = models.CharField(max_length=6, choices=Levels, default=LOW)
+    done_quest = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('todo:detail', kwargs={'pk': self.pk})

@@ -70,7 +70,8 @@ class QuestDelete(DeleteView):
     model = Quest
     success_url = reverse_lazy('todo:index')
 
-# class DoneQuest(UpdateView):
-#     model = Quest
-#     fields = ['quest_name']
-#     template_name_suffix = '_update_form'
+class DoneQuest(UpdateView):
+    model = Quest
+    fields = ['done_quest']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('todo:index')
