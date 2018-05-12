@@ -21,14 +21,14 @@
     {% if request.user.is_authenticated %}
         <a class="btn btn-warning" href="{% url 'todo:create_quest'%}">Add Quest</a>
         <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>
-        <a class="btn btn-danger" href="{% url 'account_logout'%}">Wyloguj sie</a>
+        <a class="btn btn-danger" href="{% url 'accounts:logout'%}">Wyloguj sie</a>
 
         <a class="btn btn-info" href="{% url 'todo:about'%}">About</a>
         <a class="btn btn-primary" href="/">Strona główna</a>
 
     {% else %}
-        <a class="btn btn-success" href="{% url 'account_login'%}">Zaloguj</a>
-        <a class="btn btn-success" href="{% url 'account_signup'%}">Zaloz konto</a>
+        <a class="btn btn-success" href="{% url 'accounts:login'%}">Zaloguj</a>
+        <a class="btn btn-success" href="{% url 'accounts:register'%}">Zaloz konto</a>
         {% providers_media_js %}
         <a class="btn btn-primary" href="{% provider_login_url 'facebook' method='js_sdk' %}">Zaloguj przez Facebook</a>
         <a class="btn btn-info" href="{% url 'todo:about'%}">About</a>

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'todo.apps.TodoConfig',
     # 'users.apps.UsersConfig',
     'users',
+    'accounts',
 
     'allauth',
     'allauth.account',

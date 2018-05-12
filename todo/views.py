@@ -1,10 +1,9 @@
-from django.shortcuts import render, render_to_response, get_object_or_404, reverse
+from django.shortcuts import render, render_to_response, get_object_or_404, reverse, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
-from django.shortcuts import redirect
 import datetime
 from .models import Quest, Choice
 from .forms import QuestForm, LogForm
