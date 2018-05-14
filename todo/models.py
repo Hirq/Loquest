@@ -21,6 +21,8 @@ class Quest(models.Model):
     pub_date = models.DateTimeField('date published', default="")
     levels = models.CharField(max_length=6, choices=Levels, default=LOW)
     done_quest = models.BooleanField(default=False)
+    today_quest = models.BooleanField(default=False)
+
 
     def get_absolute_url(self):
         return reverse('todo:detail', kwargs={'pk': self.pk})
@@ -36,7 +38,7 @@ class Choice(models.Model):
     choice_text = models.TextField(max_length=2100)
 
     def get_absolute_url(self):
-        return reverse('todo:index')
+        return reverse('todo:detail')
 
     def __str__(self):
         return self.choice_text

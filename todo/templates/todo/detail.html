@@ -1,22 +1,46 @@
 {% extends 'todo/base.html' %}
 {% block content %}
     <div class="container">
-        <h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>
-        <h3>Quest: {{ quest.quest_name }} </h3>
-        <h5>When: {{ quest.pub_date }}</h5>
-        <h4>Text: {{ quest.quest_text }}</h4>
-        <h5>Level: {{ quest.levels }}</h5>
+    <ul style="display: table-cell; ">
 
+        <div class="well well-sm text-center"  style="min-width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+            <h4>Name</h4>
+        </div>
+        <div style="display: inline-block;">
+
+            <h3>{{ quest.quest_name }} </h3>
+            <h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>
+        </div>
+        <div class="well well-sm text-center"  style="min-width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+            <h4>Info</h4>
+        </div>
+
+        <div>
+                    <h5>Date: {{ quest.pub_date }}</h5>
+        <h5>Level: {{ quest.levels }}</h5>
+        </div>
+
+        <hr/>
+
+            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_update_form">Done</a>
+            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="choice_form">Add Log</a>
+            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_confirm_delete">Delete this Quest</a>
+
+    </ul>
+
+    <ul style="display: table-cell; min-width: 750px">
+
+        <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
+                    <h4>Text</h4>
+        </div>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-
-        <div class="add_log">
-            <a class="btn btn-warning" href="choice_form">Add Log</a>
-            <a class="btn btn-info" href="quest_update_form">DONE</a>
-        </div>
+        <h4>{{ quest.quest_text }}</h4>
 
         {% for choice in quest.choice_set.all %}
+            <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
+
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -32,11 +56,11 @@
                     </div>
                 </div>
             </div>
+
+        </div>
         {% endfor %}
 
-        <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>
-        <a id="delete_quest" class="btn btn-danger" href="quest_confirm_delete">Delete this Quest</a>
-
+    </ul>
     </div>
 
 {% endblock %}

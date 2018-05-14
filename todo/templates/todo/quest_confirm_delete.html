@@ -4,8 +4,8 @@
     <div class="container">
         <form method="post">{% csrf_token %}
             <h2>Are you sure you want to delete quest: {{ object }} ?</h2>
-            <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>
-            <input id="delete_quest" type="submit" class="btn btn-danger" value="Delete" />
+            <input id="delete_quest" class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" value="Delete" />
+
         </form>
     </div>
 

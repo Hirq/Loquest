@@ -9,7 +9,7 @@ from .models import Quest, Choice
 from .forms import QuestForm, LogForm
 
 def about(request):
-    return render(request, 'todo/about.html')
+    return render(request, 'todo/delete_all.html')
 
 class IndexView(generic.ListView):
     template_name = 'todo/index.html'
@@ -45,6 +45,25 @@ def new_quest(request):
 
     return render(request, 'todo/quest_form.html', {'form': form})
 
+def new_quest_today(request):
+    current_user = request.user
+
+
+    if request.method == "POST":
+        form = QuestForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.pub_date = timezone.now()
+            post.who = current_user
+            post.today_quest = True
+            post.save()
+
+            return redirect('todo:index')
+    else:
+        form = QuestForm(initial={'today_quest': True})
+
+    return render(request, 'todo/quest_form.html', {'form': form})
+
 def new_log(request, quest_id):
     quest1 = get_object_or_404(Quest, pk=quest_id)
     quest_text = quest1.quest_text
@@ -74,3 +93,16 @@ class DoneQuest(UpdateView):
     fields = ['done_quest']
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('todo:index')
+
+
+def TodayDelete(request):
+    current_user = request.user
+    questy = Quest.objects.filter(today_quest=True, done_quest=True, who=current_user)
+    questy.delete()
+    return render(request, 'todo/delete_today.html')
+
+def DeleteAll(request):
+    current_user = request.user
+    questy = Quest.objects.filter(who=current_user)
+    questy.delete()
+    return render(request, 'todo/confirmation.html')

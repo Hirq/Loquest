@@ -1,13 +1,20 @@
 {% extends 'todo/base.html' %}
 {% block content %}
-
-    <div class="container">
-        <h1>New quest</h1>
-        <form method="POST" class="post-form">{% csrf_token %}
-            {{ form.as_p }}
-            <button id="delete_quest" type="submit" class="btn btn-warning">Add Quest</button>
-            <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>
-        </form>
+<div class = "container" style="margin-right: -10%;padding-top: 50px;">
+    <div class = "col-md-6 col-md-offset-3">
+        <div class="wrapper">
+            <div class="container" id="formy1">
+                <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 0 5px;">
+                        <h3>New quest
+                        </h3>
+                </div>
+                <form method="POST" class="post-form">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" type="submit">Add Quest</button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
 {% endblock %}

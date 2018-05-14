@@ -11,11 +11,39 @@ body {
 }
 
 #equal {
-    width: 200px;
+    width: 400px
 
 }
 
+#formy1 {
+    padding-top: 50px;
+    width: 600px;
+    color: #083A32;
+}
 
+.flash {
+    min-width: 30px;
+    min-height: 30px;
+    fill: red;
+}
+.flash:hover {
+  fill: orange;
+}
+
+
+#logo {
+    max-width: 50px;
+    max-height: 35px;
+    float: left;
+    margin: 35px 0px 0px 40px;
+
+
+}
+
+#menu {
+    float: right;
+    padding: 35px 30px 0px 0px;
+}
 
 .well-sm {
     padding: 12px;
