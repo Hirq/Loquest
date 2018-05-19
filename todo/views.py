@@ -5,8 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
 import datetime
-from .models import Quest, Choice
-from .forms import QuestForm, LogForm
+from .models import Quest, Choice, Victory
+from .forms import QuestForm, LogForm, VictoryForm
 
 
 class IndexView(generic.ListView):
@@ -115,6 +115,40 @@ def DeleteAllQuests(request):
     quests.delete()
     return render(request, 'todo/confirmation.html')
 
+class VictoryList(generic.ListView):
+    template_name = 'todo/victory.html'
+    context_object_name = 'victory_list'
+
+    def get_queryset(self):
+        return Victory.objects.order_by('-pub_date')[:20]
+
+def AddVictory(request):
+    current_user = request.user
+
+    if request.method == "POST":
+        form = VictoryForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.who = current_user
+            post.pub_date = timezone.now()
+            post.save()
+
+            return redirect('todo:victory')
+    else:
+        form = VictoryForm()
+
+    return render(request, 'todo/victory_form.html', {'form': form, })
+
+def DeleteVictoriesAll(request):
+    current_user = request.user
+
+    victories = Victory.objects.filter(who=current_user)
+    victories.delete()
+    return render(request, 'todo/confirmation.html')
+
+class DeleteVictory(DeleteView):
+    model = Victory
+    success_url = reverse_lazy('todo:victory')
 
 # def add_all_daily_quests(request):
 #     quest1 = get_object_or_404(Quest)
