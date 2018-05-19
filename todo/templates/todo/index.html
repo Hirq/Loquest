@@ -1,23 +1,26 @@
 {% extends 'todo/base.html' %}
-
+        {% load icons %}
 
 {% block content %}
 
     <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
 
         <div class="container" style="min-width: 900px">
-         {% load static %}
+            {% load static %}
+
             <ul style="display: table-cell; width: 250px">
                 <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-                     Today
-                    <a href="{% url 'todo:create_quest_today' %}">
-                        <img src="{% static "todo/flash.svg" %}"alt="flash" class="flash"/>
+                    <a style="font-size: 30px; color:darkgoldenrod; float:left; margin-top: -11px" href="{% url 'todo:create_quest_today' %}">
+                        {% icon 'bolt' %}
                     </a>
+                     Today
+                     <a style="font-size: 15px; color:silver; float:right;" href="{% url 'todo:delete_today_quests' %}">
+                        {% icon 'trash' %}
+                     </a>
                 </div>
                     {% for quest in list %}
                         {% if quest.who == request.user %}
                             {% if quest.today_quest == True %}
-
                             {% if quest.done_quest == False %}
 
                                 {% if quest.levels == "LOW" %}
@@ -35,8 +38,8 @@
             <ul style="width: 250px; display: table-cell;">
                 <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
                      DoneToday
-                    <a href="{% url 'todo:today_delete' %}">
-                        <img src="{% static "todo/flash.svg" %}"alt="flash" class="flash"/>
+                    <a style="font-size: 15px; color:silver; float:right;" href="{% url 'todo:delete_today_quests_done' %}">
+                        {% icon 'trash' %}
                     </a>
                 </div>
                     {% for quest in list %}
@@ -58,10 +61,10 @@
             </ul>
             <ul style="display: table-cell; width: 250px">
                 <div class="well well-sm text-center"  style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-                    List of quests
-                    <a href="{% url 'todo:create_quest' %}">
-                        <img src="{% static "todo/flash.svg" %}"alt="flash" class="flash"/>
+                    <a style="font-size: 30px; color:darkgoldenrod; float: left; margin-top:-11px" href="{% url 'todo:create_quest' %}">
+                        {% icon 'bolt' %}
                     </a>
+                    List of quests
                 </div>
                 {% for quest in list %}
                     {% if quest.who == request.user %}

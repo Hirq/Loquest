@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'users',
     'accounts',
 
+    'django_icons',
+    'bootstrap3',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
