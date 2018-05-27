@@ -14,9 +14,9 @@
         <table class="table">
             <thead>
             <tr>
-              <th style="width: 5%" scope="col">#</th>
-              <th style="width: 70%" scope="col">Text</th>
-              <th style="width: 20%;" scope="col">Date</th>
+              <th style="width: 2%" scope="col">#</th>
+              <th style="width: 86%" scope="col">Text</th>
+              <th style="width: 10%;" scope="col">Date</th>
               <th style="width: 2%" scope="col>">Delete</th>
             </tr>
             </thead>
@@ -26,7 +26,7 @@
                         <tr>
                         <th>{{ forloop.counter }}</th>
                             <td>{{ victory.victory_text }}</td>
-                            <td>{{ victory.pub_date.date }}</td>
+                            <td>{{ victory.pub_date|date:"d/m/Y"}}</td>
                             <td>
                              <a style="font-size: 25px; color:silver; float: right; margin-top: -7px" href="{{ victory.id }}/victory/victory_confirm_delete">
                                 {% icon 'trash' %}

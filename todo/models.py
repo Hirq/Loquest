@@ -15,7 +15,7 @@ class Quest(models.Model):
     )
     who = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     quest_name = models.CharField(max_length=400, default='Quest')
-    quest_text = models.TextField(max_length=2100)
+    quest_text = models.TextField(max_length=2100, default='text')
     pub_date = models.DateTimeField('date published', default="")
     levels = models.CharField(max_length=6, choices=Levels, default=LOW)
     done_quest = models.BooleanField(default=False)
