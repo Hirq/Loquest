@@ -20,6 +20,8 @@ class Quest(models.Model):
     levels = models.CharField(max_length=6, choices=Levels, default=LOW)
     done_quest = models.BooleanField(default=False)
     today_quest = models.BooleanField(default=False)
+    daily_quest = models.BooleanField(default=False)
+
 
     def get_absolute_url(self):
         return reverse('todo:detail', kwargs={'pk': self.pk})
@@ -52,4 +54,3 @@ class Victory(models.Model):
 
     def __str__(self):
         return self.victory_text
-

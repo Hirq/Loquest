@@ -22,13 +22,14 @@
                         {% if quest.who == request.user %}
                             {% if quest.today_quest == True %}
                             {% if quest.done_quest == False %}
-
+                            {% if quest.daily_quest == False %}
                                 {% if quest.levels == "LOW" %}
                                     <li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
                                 {% elif quest.levels == "MIDDLE" %}
                                    <li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
                                 {% elif quest.levels == "HARD" %}
                                    <li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
+                                {% endif %}
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
@@ -70,13 +71,14 @@
                     {% if quest.who == request.user %}
                         {% if quest.today_quest == False %}
                         {% if quest.done_quest == False %}
-
+                        {% if quest.daily_quest == False %}
                             {% if quest.levels == "LOW" %}
                                 <li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
                             {% elif quest.levels == "MIDDLE" %}
                                <li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
                             {% elif quest.levels == "HARD" %}
                                <li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                         {% endif %}

@@ -1,33 +1,12 @@
 {% extends 'todo/base.html' %}
 {% block content %}
     <div class="container" style="width: 600px">
-{#        <h2>O projekcie</h2>#}
-{#        <h5>Strona została napisana w frameworku Django, ma pomgać w nauce języka angielskiego.</h5>#}
-{#        <h7>Kolory zadań odnoszą się do 3 poziomów:</h7>#}
-{#        <br>#}
-{#        <h8>Zielony - Łatwy</h8>#}
-{#        <br>#}
-{#        <h8>Zółty - Średni</h8>#}
-{#        <br>#}
-{#        <h8>Czerwony - Trudny</h8>#}
-{#        <h5>Page was written in framework Django for help in learn English language. </h5>#}
-{#        <h7>Quest colors show 3 levels: </h7>#}
-{#        <br>#}
-{#        <h8>Green - Low</h8>#}
-{#        <br>#}
-{#        <h8>Yellow - Middle</h8>#}
-{#        <br>#}
-{#        <h8>Red - HARD</h8>#}
-
         <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
          Do you sure delete all quest in aplications?
-
-
         </div>
-
+        <div style="display: flex">
             <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:delete_all_quests' %}">Delete all</a>
-
-
-
+            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:index' %}">Back</a>
+        </div>
     </div>
 {% endblock %}

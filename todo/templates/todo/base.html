@@ -1,52 +1,21 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Balder</title>
+        <title>Loquest</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static '/todo/style1.css' %}">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-      crossorigin="anonymous"
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
->
-{% load bootstrap3 %}
+        {% load bootstrap3 %}
         {% load icons %}
-{#        {% bootstrap_css %}#}
-{#        {% bootstrap_javascript %}#}
-{#        {% bootstrap_messages %}#}
         {% load socialaccount %}
 
     </head>
 
     <body>
 
-{#    <nav class="navbar navbar-light" style="background-color: #08332C;">#}
-{#        <form class="form-inline">#}
-{##}
-{#    {% if request.user.is_authenticated %}#}
-{#        <a class="btn btn-warning" href="{% url 'todo:create_quest'%}">Add Quest</a>#}
-{#        <a class="btn btn-primary" href="{% url 'todo:index'%}">List of Quests</a>#}
-{#        <a class="btn btn-danger" href="{% url 'accounts:logout'%}">Wyloguj sie</a>#}
-{##}
-{#        <a class="btn btn-info" href="{% url 'todo:about'%}">About</a>#}
-{#        <a class="btn btn-primary" href="/">Strona główna</a>#}
-{##}
-{#    {% else %}#}
-{#        <a class="btn btn-success" href="{% url 'accounts:login'%}">Zaloguj</a>#}
-{#        <a class="btn btn-success" href="{% url 'accounts:register'%}">Zaloz konto</a>#}
-{#        {% providers_media_js %}#}
-{#        <a class="btn btn-primary" href="{% provider_login_url 'facebook' method='js_sdk' %}">Zaloguj przez Facebook</a>#}
-{#        <a class="btn btn-info" href="{% url 'todo:about'%}">About</a>#}
-{##}
-{#    {% endif %}#}
-{##}
-{#        </form>#}
-{#    </nav>#}
     {% load static %}
     <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:index' %}" id="logo">
         {% icon 'home' %}
@@ -54,7 +23,7 @@
     <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:victory' %}" id="logo">
         {% icon 'connectdevelop' %}
     </a>
-    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:index' %}" id="logo">
+    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:daily' %}" id="logo">
         {% icon 'gavel' %}
     </a>
     <div class="btn-group dropleft" id="menu">
@@ -77,9 +46,9 @@
     <div class="container" style="min-width: 900px">
         <div class="well well-sm text-center" style="display: flow-root;background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
 
-            <h3>Randal!</h3>
+            <h3>Loquest!</h3>
         </small>
-                Add, save progress, done. </small>
+                Add, save progress, done quests. </small>
 
         </div>
     </div>

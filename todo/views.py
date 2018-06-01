@@ -7,7 +7,7 @@ from django.utils import timezone
 import datetime
 from .models import Quest, Choice, Victory
 from .forms import QuestForm, LogForm, VictoryForm
-
+import copy
 
 class IndexView(generic.ListView):
     template_name = 'todo/index.html'
@@ -25,12 +25,22 @@ class DetailView(generic.DetailView):
     def index(request):
         return redirect('todo:index')
 
+
 def RemoveView(request):
     return render(request, 'todo/delete_all.html')
 
 
+def DailyRemoveView(request):
+    return render(request, 'todo/delete_daily.html')
+
+
+def VictoryRemoveView(request):
+    return render(request, 'todo/delete_victory.html')
+
+
 def About(request):
     return render(request, 'todo/about.html')
+
 
 def NewQuest(request):
     current_user = request.user
@@ -49,6 +59,7 @@ def NewQuest(request):
 
     return render(request, 'todo/quest_form.html', {'form': form})
 
+
 def NewTodayQuest(request):
     current_user = request.user
 
@@ -66,6 +77,7 @@ def NewTodayQuest(request):
         form = QuestForm(initial={'today_quest': True})
 
     return render(request, 'todo/quest_form.html', {'form': form})
+
 
 def NewLog(request, quest_id):
     quest = get_object_or_404(Quest, pk=quest_id)
@@ -93,9 +105,11 @@ class DoneQuest(UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('todo:index')
 
+
 class DeleteQuest(DeleteView):
     model = Quest
     success_url = reverse_lazy('todo:index')
+
 
 def DeleteTodayQuestsDone(request):
     current_user = request.user
@@ -103,11 +117,13 @@ def DeleteTodayQuestsDone(request):
     quests.delete()
     return render(request, 'todo/delete_today.html')
 
+
 def DeleteTodayQuest(request):
     current_user = request.user
     quests = Quest.objects.filter(today_quest=True, done_quest=False, who=current_user)
     quests.delete()
     return render(request, 'todo/delete_today.html')
+
 
 def DeleteAllQuests(request):
     current_user = request.user
@@ -115,12 +131,14 @@ def DeleteAllQuests(request):
     quests.delete()
     return render(request, 'todo/confirmation.html')
 
+
 class VictoryList(generic.ListView):
     template_name = 'todo/victory.html'
     context_object_name = 'victory_list'
 
     def get_queryset(self):
         return Victory.objects.order_by('-pub_date')[:20]
+
 
 def AddVictory(request):
     current_user = request.user
@@ -139,6 +157,7 @@ def AddVictory(request):
 
     return render(request, 'todo/victory_form.html', {'form': form, })
 
+
 def DeleteVictoriesAll(request):
     current_user = request.user
 
@@ -146,13 +165,70 @@ def DeleteVictoriesAll(request):
     victories.delete()
     return render(request, 'todo/confirmation.html')
 
+
 class DeleteVictory(DeleteView):
     model = Victory
     success_url = reverse_lazy('todo:victory')
 
-# def add_all_daily_quests(request):
-#     quest1 = get_object_or_404(Quest)
-#     current_user = request.user
-#     questy_daily = Quest.objects.filter(today_quest=True, quest=quest1, on_list_today=True, who=current_user)
-#     questy_daily.update(on_list_today=False)
-#     return render(request, 'todo/confirmation.html')
+
+# Section of daily
+def DailyViewBasic(request):
+    return render(request, "todo/daily.html")
+
+
+class DailyList(generic.ListView):
+    template_name = 'todo/daily.html'
+    context_object_name = 'daily_list'
+
+    def get_queryset(self):
+        return Quest.objects.order_by('-pub_date')[:20]
+
+
+def NewDailyQuest(request):
+    current_user = request.user
+
+    if request.method == "POST":
+        form = QuestForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.pub_date = timezone.now()
+            post.who = current_user
+            post.today_quest = False
+            post.daily_quest = True
+            post.save()
+
+            return redirect('todo:daily')
+    else:
+        form = QuestForm(initial={'today_quest': True, 'daily_quest': True})
+
+    return render(request, 'todo/quest_form.html', {'form': form})
+
+
+def CopyDailyQuests_TransportOriginal(request):
+    current_user = request.user
+
+
+    dailies = Quest.objects.filter(today_quest=True, done_quest=False, daily_quest=True, who=current_user)
+    dailies.update(daily_quest=False)
+
+    return render(request, 'todo/confirmation.html')
+
+
+def CopyDailyQuests(request):
+    current_user = request.user
+
+    quests = Quest.objects.filter(today_quest=False, daily_quest=True, done_quest=False, who=current_user)
+    daily = copy.copy(quests)
+    quests.update(daily_quest=False, today_quest=True)
+    for quest in daily:
+        quest.pk = None
+        quest.save()
+
+    return render(request, 'todo/confirmation.html')
+
+
+def DeleteDailyQuests(request):
+    current_user = request.user
+    quests = Quest.objects.filter(daily_quest=True, today_quest=False, done_quest=False, who=current_user)
+    quests.delete()
+    return render(request, 'todo/confirmation.html')

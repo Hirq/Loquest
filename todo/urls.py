@@ -22,7 +22,16 @@ urlpatterns = [
 
     path('victory', views.VictoryList.as_view(), name='victory'),
     path('victory/victory_form', views.AddVictory, name='victory_form'),
+    path('delete_view_victory', views.VictoryRemoveView, name='delete_view_victory'),
     path('victory_delete_all', views.DeleteVictoriesAll, name='victory_delete_all'),
-    path('<int:pk>/victory/victory_confirm_delete/', views.DeleteVictory.as_view(), name='victory_confirm_delete')
+    path('<int:pk>/victory/victory_confirm_delete/', views.DeleteVictory.as_view(), name='victory_confirm_delete'),
+
+    #Daily
+    #path('daily', views.DailyViewBasic, name='daily'),
+    path('daily', views.DailyList.as_view(), name='daily'),
+    path('quest_form_daily', views.NewDailyQuest, name='create_quest_daily'),
+    path('copy', views.CopyDailyQuests, name='copy'),
+    path('delete_view_daily', views.DailyRemoveView, name='delete_view_daily'),
+    path('delete_daily_quests', views.DeleteDailyQuests, name='delete_daily_quests')
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
