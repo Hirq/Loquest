@@ -31,12 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
     'todo.apps.TodoConfig',
     # 'users.apps.UsersConfig',
     'users',
     'accounts',
-
+    
     'django_icons',
     'bootstrap3',
     'allauth',
@@ -148,7 +147,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'todo'),  # Here you tell django to look for a folder named 'assets'
     ]
 
-LOGIN_REDIRECT_URL = '/todo/'
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'users.AppUser'
 

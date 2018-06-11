@@ -9,6 +9,7 @@ from .models import Quest, Choice, Victory
 from .forms import QuestForm, LogForm, VictoryForm
 import copy
 
+
 class IndexView(generic.ListView):
     template_name = 'todo/index.html'
     context_object_name = 'list'

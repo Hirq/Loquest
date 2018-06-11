@@ -20,9 +20,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls')),
-    path('todo/', include('todo.urls')),
+    path('', include('todo.urls')),
     path(r'^accounts/', include('allauth.urls')),
-    path('todo/accounts/', include("accounts.urls", namespace="accounts")),
+    path('accounts/', include("accounts.urls", namespace="accounts")),
 
 ]

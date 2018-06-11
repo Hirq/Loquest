@@ -106,44 +106,46 @@
                     {% endfor %}
             </ul>
     </div>
-        <div class="container" style="width: 600px;">
-            <ul style="display: table-cell; width: 250px">
-                    <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-                         Wszystkie
-                    </div>
-                    {% for quest in list %}
-                            {% if quest.done_quest == False %}
 
-                                {% if quest.levels == "LOW" %}
-                                    <li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                                {% elif quest.levels == "MIDDLE" %}
-                                   <li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                                {% elif quest.levels == "HARD" %}
-                                   <li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                                {% endif %}
-                            {% endif %}
-                    {% endfor %}
-            </ul>
-            <ul style="display: table-cell; width: 250px">
-                <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-                    Done
-                </div>
-                {% for quest in list %}
-                    {% if quest.who == request.user %}
-                        {% if quest.done_quest == True %}
 
-                            {% if quest.levels == "LOW" %}
-                                <li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                            {% elif quest.levels == "MIDDLE" %}
-                               <li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                            {% elif quest.levels == "HARD" %}
-                               <li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-    </div>
+        <!--<div class="container" style="width: 600px;">-->
+            <!--<ul style="display: table-cell; width: 250px">-->
+                    <!--<div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">-->
+                         <!--Wszystkie-->
+                    <!--</div>-->
+                    <!--{% for quest in list %}-->
+                            <!--{% if quest.done_quest == False %}-->
+
+                                <!--{% if quest.levels == "LOW" %}-->
+                                    <!--<li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                                <!--{% elif quest.levels == "MIDDLE" %}-->
+                                   <!--<li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                                <!--{% elif quest.levels == "HARD" %}-->
+                                   <!--<li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                                <!--{% endif %}-->
+                            <!--{% endif %}-->
+                    <!--{% endfor %}-->
+            <!--</ul>-->
+            <!--<ul style="display: table-cell; width: 250px">-->
+                <!--<div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">-->
+                    <!--Done-->
+                <!--</div>-->
+                <!--{% for quest in list %}-->
+                    <!--{% if quest.who == request.user %}-->
+                        <!--{% if quest.done_quest == True %}-->
+
+                            <!--{% if quest.levels == "LOW" %}-->
+                                <!--<li><a style="color: green;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                            <!--{% elif quest.levels == "MIDDLE" %}-->
+                               <!--<li><a style="color: yellow;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                            <!--{% elif quest.levels == "HARD" %}-->
+                               <!--<li><a style="color: red;" href="{% url 'todo:detail' quest.id %}"> {{ quest.quest_name }}</a></li>-->
+                            <!--{% endif %}-->
+                        <!--{% endif %}-->
+                    <!--{% endif %}-->
+                <!--{% endfor %}-->
+            <!--</ul>-->
+    <!--</div>-->
     </div>
 
 
