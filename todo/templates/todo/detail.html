@@ -9,15 +9,18 @@
         <div style="display: inline-block;">
 
             <h3>{{ quest.quest_name }} </h3>
-            <h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>
+            <!--<h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>-->
         </div>
         <div class="well well-sm text-center"  style="min-width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
             <h4>Info</h4>
         </div>
 
         <div>
-                    <h5>Date: {{ quest.pub_date }}</h5>
-        <h5>Level: {{ quest.levels }}</h5>
+            <h5>Date: {{ quest.pub_date }}</h5>
+            <h5>Level: {{ quest.levels }}</h5>
+            {% if quest.done_date != None %}
+                <h5>Done: {{ quest.done_date }}</h5>
+            {% endif %}
         </div>
 
         <hr/>
@@ -52,6 +55,8 @@
                     <div id="collapse{{ choice.id }}" class="panel-collapse collapse in">
                         <div class="panel-body">
                             {{ choice.choice_text }}
+                            <br>
+                            {{ choice.pub_date }}
                         </div>
                     </div>
                 </div>

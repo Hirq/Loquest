@@ -40,3 +40,7 @@ class VictoryForm(forms.ModelForm):
             'class': 'form-control',
             'name': 'victory_text'})
 
+class UpdateForm(forms.ModelForm):
+    class Meta:
+        model = Quest
+        fields = ['done_quest', 'done_date']

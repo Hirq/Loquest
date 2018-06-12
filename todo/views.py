@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 import datetime
 from .models import Quest, Choice, Victory
-from .forms import QuestForm, LogForm, VictoryForm
+from .forms import QuestForm, LogForm, VictoryForm, UpdateForm
 import copy
 
 
@@ -91,6 +91,7 @@ def NewLog(request, quest_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.quest = quest
+            post.pub_date = timezone.now()
             post.save()
             return redirect('todo:index')
 
@@ -102,9 +103,13 @@ def NewLog(request, quest_id):
 
 class DoneQuest(UpdateView):
     model = Quest
-    fields = ['done_quest']
+    form_class = UpdateForm
+
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('todo:index')
+
+    def get_initial(self):
+        return {'done_quest': True, 'done_date': timezone.now()}
 
 
 class DeleteQuest(DeleteView):

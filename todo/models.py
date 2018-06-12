@@ -17,11 +17,11 @@ class Quest(models.Model):
     quest_name = models.CharField(max_length=400, default='Quest')
     quest_text = models.TextField(max_length=2100, default='text')
     pub_date = models.DateTimeField('date published', default="")
+    done_date = models.DateTimeField(null=True, blank=True)
     levels = models.CharField(max_length=6, choices=Levels, default=LOW)
     done_quest = models.BooleanField(default=False)
     today_quest = models.BooleanField(default=False)
     daily_quest = models.BooleanField(default=False)
-
 
     def get_absolute_url(self):
         return reverse('todo:detail', kwargs={'pk': self.pk})
@@ -36,6 +36,7 @@ class Quest(models.Model):
 class Choice(models.Model):
     quest = models.ForeignKey(Quest, on_delete=models.CASCADE, null=True)
     choice_text = models.TextField(max_length=2100)
+    pub_date = models.DateTimeField('date', default='')
 
     def get_absolute_url(self):
         return reverse('todo:detail')
@@ -54,3 +55,4 @@ class Victory(models.Model):
 
     def __str__(self):
         return self.victory_text
+

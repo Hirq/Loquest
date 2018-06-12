@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'todo.apps.TodoConfig',
-    # 'users.apps.UsersConfig',
+    #'users.apps.UsersConfig',
     'users',
     'accounts',
     
