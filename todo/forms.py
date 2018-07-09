@@ -1,5 +1,5 @@
 from django import forms
-from .models import Quest, Choice, Victory
+from .models import Quest, Choice, Victory, Purpose
 
 
 class QuestForm(forms.ModelForm):
@@ -18,6 +18,7 @@ class QuestForm(forms.ModelForm):
 
 
 class LogForm(forms.ModelForm):
+    """LogForm"""
     class Meta:
         model = Choice
         fields = ['choice_text']
@@ -32,13 +33,24 @@ class LogForm(forms.ModelForm):
 class VictoryForm(forms.ModelForm):
     class Meta:
         model = Victory
-        fields = ['victory_text']
+        fields = ['victory_text', 'pub_date']
 
     def __init__(self, *args, **kwargs):
         super(VictoryForm, self).__init__(*args, **kwargs)
         self.fields['victory_text'].widget.attrs.update({
             'class': 'form-control',
             'name': 'victory_text'})
+        self.fields['pub_date'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'pub_date'})
+
+
+class PurposeForm(forms.ModelForm):
+    class Meta:
+        model = Purpose
+        fields = ['purpose_text', 'pub_date']
+
+
 
 class UpdateForm(forms.ModelForm):
     class Meta:

@@ -48,7 +48,7 @@ class Choice(models.Model):
 class Victory(models.Model):
     who = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     victory_text = models.CharField(max_length=400, default='You the best thing what u want save')
-    pub_date = models.DateTimeField('date', default='')
+    pub_date = models.DateField('date', default='')
 
     def get_absolute_url(self):
         return reverse('todo:victory')
@@ -56,3 +56,14 @@ class Victory(models.Model):
     def __str__(self):
         return self.victory_text
 
+
+class Purpose(models.Model):
+    who = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    purpose_text = models.CharField(max_length=400, default='Your purpose')
+    pub_date = models.DateField('date', default='')
+
+    def get_absolute_url(self):
+        return reverse('todo:purpose')
+
+    def __str__(self):
+        return self.purpose_text

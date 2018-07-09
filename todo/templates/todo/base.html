@@ -20,16 +20,21 @@
     <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:index' %}" id="logo">
         {% icon 'home' %}
     </a>
-    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:victory' %}" id="logo">
-        {% icon 'connectdevelop' %}
-    </a>
     <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:daily' %}" id="logo">
         {% icon 'gavel' %}
     </a>
     <div class="btn-group dropleft" id="menu">
+        <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:victory' %}">
+            {% icon 'photo' %}
+        </a>
+        <a style="font-size: 25px; color:aliceblue; padding-left:30px; padding-right:30px; " href="{% url 'todo:purpose' %}">
+            {% icon 'connectdevelop' %}
+        </a>
+
         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" style="background-color: #071422;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="sr-only">Toggle Dropdown</span>
         </button>
+
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {% if request.user.is_authenticated %}
                 <a class="dropdown-item" href="{% url 'todo:about' %}">About</a>
@@ -45,11 +50,8 @@
     </div>
     <div class="container" style="min-width: 900px">
         <div class="well well-sm text-center" style="display: flow-root;background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-
             <h3>Loquest!</h3>
-        </small>
-                Add, save progress, done quests. </small>
-
+            </small>Add, save progress, done quests.</small>
         </div>
     </div>
 

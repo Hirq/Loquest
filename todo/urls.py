@@ -20,6 +20,7 @@ urlpatterns = [
     path('delete_view', views.RemoveView, name='delete_view'),
     path('delete_today_quests', views.DeleteTodayQuest, name='delete_today_quests'),
 
+    #Victory
     path('victory', views.VictoryList.as_view(), name='victory'),
     path('victory/victory_form', views.AddVictory, name='victory_form'),
     path('delete_view_victory', views.VictoryRemoveView, name='delete_view_victory'),
@@ -32,6 +33,13 @@ urlpatterns = [
     path('quest_form_daily', views.NewDailyQuest, name='create_quest_daily'),
     path('copy', views.CopyDailyQuests, name='copy'),
     path('delete_view_daily', views.DailyRemoveView, name='delete_view_daily'),
-    path('delete_daily_quests', views.DeleteDailyQuests, name='delete_daily_quests')
+    path('delete_daily_quests', views.DeleteDailyQuests, name='delete_daily_quests'),
+
+    #Purpose
+    path('purpose', views.PurposeList.as_view(), name='purpose'),
+    path('purpose/purpose_form', views.AddPurpose, name='purpose_form'),
+    path('delete_view_purpose', views.PurposeRemoveView, name='delete_view_purpose'),
+    path('purpose_delete_all', views.DeletePurposeAll, name='purpose_delete_all'),
+    path('<int:pk>/purpose/purpose_confirm_delete/', views.DeletePurpose.as_view(), name='purpose_confirm_delete'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

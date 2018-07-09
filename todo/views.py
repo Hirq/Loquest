@@ -5,8 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
 import datetime
-from .models import Quest, Choice, Victory
-from .forms import QuestForm, LogForm, VictoryForm, UpdateForm
+from .models import Quest, Choice, Victory, Purpose
+from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm
 import copy
 
 
@@ -16,27 +16,19 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published quests."""
-        return Quest.objects.order_by('-pub_date')[:25]
+        return Quest.objects.order_by('-pub_date')[::]
 
 
 class DetailView(generic.DetailView):
     model = Quest
     template_name = 'todo/detail.html'
-
-    def index(request):
+      
+    def index(self, request):
         return redirect('todo:index')
 
 
 def RemoveView(request):
     return render(request, 'todo/delete_all.html')
-
-
-def DailyRemoveView(request):
-    return render(request, 'todo/delete_daily.html')
-
-
-def VictoryRemoveView(request):
-    return render(request, 'todo/delete_victory.html')
 
 
 def About(request):
@@ -138,6 +130,11 @@ def DeleteAllQuests(request):
     return render(request, 'todo/confirmation.html')
 
 
+
+
+
+
+#Victory
 class VictoryList(generic.ListView):
     template_name = 'todo/victory.html'
     context_object_name = 'victory_list'
@@ -154,14 +151,18 @@ def AddVictory(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.who = current_user
-            post.pub_date = timezone.now()
             post.save()
 
             return redirect('todo:victory')
     else:
-        form = VictoryForm()
+        form = VictoryForm(initial={'pub_date': timezone.now()})
+
 
     return render(request, 'todo/victory_form.html', {'form': form, })
+
+
+def VictoryRemoveView(request):
+    return render(request, 'todo/delete_victory.html')
 
 
 def DeleteVictoriesAll(request):
@@ -175,6 +176,10 @@ def DeleteVictoriesAll(request):
 class DeleteVictory(DeleteView):
     model = Victory
     success_url = reverse_lazy('todo:victory')
+
+
+
+
 
 
 # Section of daily
@@ -233,8 +238,63 @@ def CopyDailyQuests(request):
     return render(request, 'todo/confirmation.html')
 
 
+def DailyRemoveView(request):
+    return render(request, 'todo/delete_daily.html')
+
+
 def DeleteDailyQuests(request):
     current_user = request.user
     quests = Quest.objects.filter(daily_quest=True, today_quest=False, done_quest=False, who=current_user)
     quests.delete()
     return render(request, 'todo/confirmation.html')
+
+
+
+
+
+
+
+
+# Section Purpose
+def PurposeBaseView(request):
+    return render(request, "todo/purpose.html")
+
+
+class PurposeList(generic.ListView):
+    template_name = 'todo/purpose.html'
+    context_object_name = 'purpose_list'
+
+    def get_queryset(self):
+        return Purpose.objects.order_by('-pub_date')[:20]
+
+
+def AddPurpose(request):
+    if request.method == "POST":
+        form = PurposeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.who = request.user
+            post.save()
+
+            return redirect('todo:purpose')
+    else:
+        form = PurposeForm(initial={'pub_date': timezone.now()})
+
+    return render(request, 'todo/purpose_form.html', {'form': form})
+
+
+def PurposeRemoveView(request):
+    return render(request, 'todo/delete_purpose.html')
+
+
+def DeletePurposeAll(request):
+    current_user = request.user
+
+    Purposes = Purpose.objects.filter(who=current_user)
+    Purposes.delete()
+    return render(request, 'todo/confirmation.html')
+
+
+class DeletePurpose(DeleteView):
+    model = Purpose
+    success_url = reverse_lazy('todo:purpose')
