@@ -23,6 +23,7 @@ class Quest(models.Model):
     today_quest = models.BooleanField(default=False)
     daily_quest = models.BooleanField(default=False)
 
+    
     def get_absolute_url(self):
         return reverse('todo:detail', kwargs={'pk': self.pk})
 
@@ -31,7 +32,7 @@ class Quest(models.Model):
 
     def __unicode__(self):
         return u"%s %s %s %s" % (self.quest_name, self.quest_text, self.pub_date, self.levels)
-
+        
 
 class Choice(models.Model):
     quest = models.ForeignKey(Quest, on_delete=models.CASCADE, null=True)
@@ -67,3 +68,4 @@ class Purpose(models.Model):
 
     def __str__(self):
         return self.purpose_text
+

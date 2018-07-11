@@ -1,7 +1,9 @@
 {% extends "todo/base.html" %}
 {% load icons %}
 {% block content %}
+
     <div class="container" style="width: 800px">
+
         <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 20px 5px;">
             <a style="font-size: 30px; color:darkgoldenrod; float:left; margin-top: -11px" href="{% url 'todo:victory_form' %}">
                         {% icon 'bolt' %}
@@ -11,6 +13,7 @@
                 {% icon 'ban' %}
             </a>
         </div>
+
         <table class="table">
             <thead>
             <tr>
@@ -40,4 +43,5 @@
 
 
     </div>
+
 {% endblock %}

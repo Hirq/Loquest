@@ -42,4 +42,6 @@ urlpatterns = [
     path('purpose_delete_all', views.DeletePurposeAll, name='purpose_delete_all'),
     path('<int:pk>/purpose/purpose_confirm_delete/', views.DeletePurpose.as_view(), name='purpose_confirm_delete'),
 
+    path('search', views.search, name='search'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'users',
     'accounts',
     
+    'widget_tweaks',
+    'django_filters',
     'django_icons',
     'bootstrap3',
     'allauth',
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'mysite.urls'

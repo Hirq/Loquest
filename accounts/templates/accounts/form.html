@@ -12,6 +12,7 @@
 	  border-bottom-left-radius: 0;
 	  border-bottom-right-radius: 0;
 	}
+
 	input[type="password"] {
 	  margin-bottom: 20px;
 	  border-top-left-radius: 0;
@@ -28,7 +29,7 @@
 </style>
 {% endblock %}
 
-{% block content %}\
+{% block content %}
 
 <div class = "container" style=" max-width:600px;">
 
@@ -40,8 +41,8 @@
         {{form.as_p }}
         <button class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 30px 5px 0 5px;" type="submit">{{title}}</button>
 
-        {% if title == "Login" %}<h5>Not Registered? <a href = "/todo/accounts/register/">Register Here</a></h5>{% endif %}
-        {% if title == "Register" %}<h5>Already Registered? <a href = "/todo/accounts/login/">Login Here</a></h5>{% endif %}
+        {% if title == "Login" %}<h5>Not Registered? <a href = "/accounts/register/">Register Here</a></h5>{% endif %}
+        {% if title == "Register" %}<h5>Already Registered? <a href = "/accounts/login/">Login Here</a></h5>{% endif %}
       </form>
 
 </div>

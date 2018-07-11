@@ -39,7 +39,7 @@
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <h4>{{ quest.quest_text }}</h4>
+        <h4>{{ quest.quest_text|linebreaks }}</h4>
 
         {% for choice in quest.choice_set.all %}
             <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
@@ -54,7 +54,7 @@
                     </div>
                     <div id="collapse{{ choice.id }}" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            {{ choice.choice_text }}
+                            {{ choice.choice_text|linebreaks }}
                             <br>
                             {{ choice.pub_date }}
                         </div>

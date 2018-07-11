@@ -8,6 +8,8 @@ import datetime
 from .models import Quest, Choice, Victory, Purpose
 from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm
 import copy
+from django.contrib.auth.decorators import login_required
+from .filters import QuestFilter
 
 
 class IndexView(generic.ListView):
@@ -18,6 +20,19 @@ class IndexView(generic.ListView):
         """Return the last five published quests."""
         return Quest.objects.order_by('-pub_date')[::]
 
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            q_done = Quest.objects.filter(done_quest=True,today_quest=False, daily_quest=False, who=self.request.user).count()
+            q_list = Quest.objects.filter(done_quest=False,today_quest=False,daily_quest=False,who=self.request.user).count()
+            if q_list>0:
+                context['list_quests'] = q_list
+            if q_done>0:
+                context['done_list'] = q_done
+            
+
+        return context
 
 class DetailView(generic.DetailView):
     model = Quest
@@ -34,7 +49,7 @@ def RemoveView(request):
 def About(request):
     return render(request, 'todo/about.html')
 
-
+@login_required()
 def NewQuest(request):
     current_user = request.user
 
@@ -52,7 +67,7 @@ def NewQuest(request):
 
     return render(request, 'todo/quest_form.html', {'form': form})
 
-
+@login_required()
 def NewTodayQuest(request):
     current_user = request.user
 
@@ -109,6 +124,7 @@ class DeleteQuest(DeleteView):
     success_url = reverse_lazy('todo:index')
 
 
+@login_required()
 def DeleteTodayQuestsDone(request):
     current_user = request.user
     quests = Quest.objects.filter(today_quest=True, done_quest=True, who=current_user)
@@ -116,6 +132,7 @@ def DeleteTodayQuestsDone(request):
     return render(request, 'todo/delete_today.html')
 
 
+@login_required()
 def DeleteTodayQuest(request):
     current_user = request.user
     quests = Quest.objects.filter(today_quest=True, done_quest=False, who=current_user)
@@ -142,7 +159,7 @@ class VictoryList(generic.ListView):
     def get_queryset(self):
         return Victory.objects.order_by('-pub_date')[:20]
 
-
+@login_required()
 def AddVictory(request):
     current_user = request.user
 
@@ -161,10 +178,12 @@ def AddVictory(request):
     return render(request, 'todo/victory_form.html', {'form': form, })
 
 
+@login_required()
 def VictoryRemoveView(request):
     return render(request, 'todo/delete_victory.html')
 
 
+@login_required()
 def DeleteVictoriesAll(request):
     current_user = request.user
 
@@ -194,7 +213,7 @@ class DailyList(generic.ListView):
     def get_queryset(self):
         return Quest.objects.order_by('-pub_date')[:20]
 
-
+@login_required()
 def NewDailyQuest(request):
     current_user = request.user
 
@@ -215,6 +234,7 @@ def NewDailyQuest(request):
     return render(request, 'todo/quest_form.html', {'form': form})
 
 
+@login_required()
 def CopyDailyQuests_TransportOriginal(request):
     current_user = request.user
 
@@ -225,6 +245,7 @@ def CopyDailyQuests_TransportOriginal(request):
     return render(request, 'todo/confirmation.html')
 
 
+@login_required()
 def CopyDailyQuests(request):
     current_user = request.user
 
@@ -237,11 +258,12 @@ def CopyDailyQuests(request):
 
     return render(request, 'todo/confirmation.html')
 
-
+@login_required()
 def DailyRemoveView(request):
     return render(request, 'todo/delete_daily.html')
 
 
+@login_required()
 def DeleteDailyQuests(request):
     current_user = request.user
     quests = Quest.objects.filter(daily_quest=True, today_quest=False, done_quest=False, who=current_user)
@@ -268,6 +290,7 @@ class PurposeList(generic.ListView):
         return Purpose.objects.order_by('-pub_date')[:20]
 
 
+@login_required()
 def AddPurpose(request):
     if request.method == "POST":
         form = PurposeForm(request.POST)
@@ -283,10 +306,12 @@ def AddPurpose(request):
     return render(request, 'todo/purpose_form.html', {'form': form})
 
 
+@login_required()
 def PurposeRemoveView(request):
     return render(request, 'todo/delete_purpose.html')
 
 
+@login_required()
 def DeletePurposeAll(request):
     current_user = request.user
 
@@ -298,3 +323,9 @@ def DeletePurposeAll(request):
 class DeletePurpose(DeleteView):
     model = Purpose
     success_url = reverse_lazy('todo:purpose')
+
+@login_required()
+def search(request):
+    quest_list = Quest.objects.filter(who=request.user, today_quest=False, daily_quest=False)
+    quest_filter = QuestFilter(request.GET, queryset=quest_list)
+    return render(request, 'todo/search.html', {'filter': quest_filter})

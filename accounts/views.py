@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login
 from .forms import UsersLoginForm, UsersRegisterForm
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.conf import settings
+from users.models import AppUser
+
 
 def login_view(request):
     if request.method == "POST":
@@ -21,6 +24,7 @@ def login_view(request):
             'title' : "Login",
         })
 
+
 def register_view(request):
     form = UsersRegisterForm(request.POST or None)
     if form.is_valid():
@@ -30,11 +34,13 @@ def register_view(request):
         user.save()
         new_user = authenticate(username = user.username, password = password)
         login(request, new_user)
-        return redirect("/accounts/login")
+        return redirect("/")
     return render(request, "accounts/form.html", {
         "title" : "Register",
         "form" : form,
     })
+
+    
 
 def logout_view(request):
     logout(request)
