@@ -1,7 +1,0 @@
-{
-    "python.pythonPath": "/home/zabrocki/django/myvenv/bin/python",
-    "python.linting.pydocstyleArgs": ["--load-plugins=pylint_django"],
-    "python.linting.pylintArgs": [
-        "--load-plugins=pylint_django"
-    ],
-}
