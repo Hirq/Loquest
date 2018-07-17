@@ -1,0 +1,47 @@
+{% extends "todo/base.html" %}
+{% load icons %}
+{% block content %}
+
+    <div class="container" style="width: 800px">
+
+        <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 20px 5px;">
+            <a style="font-size: 30px; color:darkgoldenrod; float:left; margin-top: -11px" href="{% url 'todo:victory_form' %}">
+                        {% icon 'bolt' %}
+            </a>
+            Victory of the day
+            <a style="font-size: 30px; color:blue; float:right; margin-top: -11px" href="{% url 'todo:delete_view_victory' %}">
+                {% icon 'ban' %}
+            </a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+              <th style="width: 2%" scope="col">#</th>
+              <th style="width: 86%" scope="col">Text</th>
+              <th style="width: 10%;" scope="col">Date</th>
+              <th style="width: 2%" scope="col>">Delete</th>
+            </tr>
+            </thead>
+            {% for victory in victory_list %}
+                {% if victory.who == request.user %}
+                    <tbody>
+                        <tr>
+                        <th>{{ forloop.counter }}</th>
+                            <td>{{ victory.victory_text }}</td>
+                            <td>{{ victory.pub_date|date:"d/m/Y"}}</td>
+                            <td>
+                             <a style="font-size: 25px; color:silver; float: right; margin-top: -7px" href="{{ victory.id }}/victory/victory_confirm_delete">
+                                {% icon 'trash' %}
+                             </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+
+    </div>
+
+{% endblock %}

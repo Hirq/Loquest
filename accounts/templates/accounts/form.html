@@ -1,0 +1,51 @@
+{% extends "todo/base.html" %}
+{% block style %}
+<style type="text/css">
+
+.form-signin {
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,0.1);
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
+@media(max-width: 500px){
+	footer{
+		height: 130px !important;
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class = "container" style=" max-width:600px;">
+
+      <form class="form-signin" method = 'POST' action= '' enctype = "multipart/form-data">{% csrf_token %}
+            <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 20px 5px 0 5px;">
+                <h3>{{title}}
+                </h3>
+            </div>
+        {{form.as_p }}
+        <button class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 30px 5px 0 5px;" type="submit">{{title}}</button>
+
+        {% if title == "Login" %}<h5>Not Registered? <a href = "/accounts/register/">Register Here</a></h5>{% endif %}
+        {% if title == "Register" %}<h5>Already Registered? <a href = "/accounts/login/">Login Here</a></h5>{% endif %}
+      </form>
+
+</div>
+{% endblock %}
+
+

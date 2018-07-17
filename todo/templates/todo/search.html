@@ -1,0 +1,78 @@
+{% extends 'todo/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+        <form method="get">
+                <div class="container" style="width: 800px">
+                  <h4 class="well well-sm text-center" style="margin: 15px 5px 20px 5px;background-color: #0B2849; color: aliceblue;">Filter Quest</h4>
+                  <div class="row" style="left: 15%">
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                        <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="search_victory">Victory</a>
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                      {{ filter.form.quest_name.label_tag }}
+                      {% render_field filter.form.quest_name class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                      {{ filter.form.levels.label_tag }}
+                      {% render_field filter.form.levels class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                      {{ filter.form.done_quest.label_tag }}
+                      {% render_field filter.form.done_quest class="form-control" %}
+                    </div>
+                  </div>
+                  <div class="row" style="left: 15%">
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                        <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="search_purpose">Purpose</a>
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                        {{ filter.form.pub_date_year.label_tag }}
+                        {% render_field filter.form.pub_date_year class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                        {{ filter.form.pub_date_month.label_tag }}
+                        {% render_field filter.form.pub_date_month class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3" style="color: aliceblue">
+                        {{ filter.form.pub_date_day.label_tag }}
+                        {% render_field filter.form.pub_date_day class="form-control" %}
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 40px 5px 60px 5px;">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                  </button>
+
+                </div>
+              </form>
+            
+              <table class="table table-bordered" style="color: aliceblue ;margin: 0px 0px 10px 6px;width:99%">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Text</th>
+                    <th>Level</th>
+                    <th>Date</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for quest in filter.qs %}
+                    <tr>
+                      <td>{{ quest.quest_name }}</td>
+                      <td>{{ quest.quest_text }}</td>
+                      <td>{{ quest.levels }}</td>
+                      <td>{{ quest.pub_date }}</td>
+
+
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="5">No data</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+
+{% endblock %}

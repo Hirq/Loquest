@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Loquest</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static '/todo/style1.css' %}">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        {% load bootstrap3 %}
+        {% load icons %}
+        {% load socialaccount %}
+
+    </head>
+
+    <body>
+
+    {% load static %}
+    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:index' %}" id="logo">
+        {% icon 'home' %}
+    </a>
+    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:daily' %}" id="logo">
+        {% icon 'gavel' %}
+    </a>
+    <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:search' %}" id="logo">
+            {% icon 'search' %}
+        </a>
+    <div class="btn-group dropleft" id="menu">
+        <a style="font-size: 25px; color:aliceblue; " href="{% url 'todo:victory' %}">
+            {% icon 'connectdevelop' %}
+        </a>
+        <a style="font-size: 25px; color:aliceblue; padding-left:30px; padding-right:30px; " href="{% url 'todo:purpose' %}">
+            {% icon 'calendar' %}
+        </a>
+
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" style="background-color: #071422;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if request.user.is_authenticated %}
+                <a class="dropdown-item" href="{% url 'todo:about' %}">About</a>
+                <a class="dropdown-item" href="{% url 'todo:delete_view' %}">Delete all</a>
+                <a class="dropdown-item" href="{% url 'accounts:logout'%}">Logout</a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'accounts:login'%}">Sign up</a>
+                <a class="dropdown-item" href="{% url 'accounts:register'%}">Sign in</a>
+                {% providers_media_js %}
+                <a class="dropdown-item" href="{% provider_login_url 'facebook' method='js_sdk' %}">Use Facebook</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container" style="min-width: 900px">
+        <div class="well well-sm text-center" style="display: flow-root;background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+            <h3>Loquest!</h3>
+            </small>Add, save progress, done quests.</small>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    {% block content %}{% endblock content %}
+
+
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </body>
+</html>

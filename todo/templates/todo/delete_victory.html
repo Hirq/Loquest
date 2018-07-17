@@ -1,0 +1,12 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+    <div class="container" style="width: 600px">
+        <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+         Do you sure delete all victories in aplications?
+        </div>
+        <div style="display: flex">
+        <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:victory_delete_all' %}">Delete all</a>
+        <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:victory' %}">Back</a>
+        </div>
+    </div>
+{% endblock %}

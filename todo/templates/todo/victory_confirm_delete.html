@@ -1,0 +1,14 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+
+    <div class="container" style="width: 600px">
+        <form method="post">{% csrf_token %}
+            <h2>Are you sure you want to delete victory:
+            </br>
+                "{{ object }}" ?</h2>
+            <input class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" value="Delete" />
+
+        </form>
+    </div>
+
+{% endblock %}

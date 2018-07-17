@@ -1,0 +1,74 @@
+{% extends "todo/base.html" %}
+{% load icons %}
+{% block content %}
+    <div class="container" style="width: 800px">
+        <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 20px 5px;">
+            <a style="font-size: 30px; color:darkgoldenrod; float:left; margin-top: -11px" href="{% url 'todo:purpose_form' %}">
+                {% icon 'bolt' %}
+            </a>
+            Purposes
+            <a style="font-size: 30px; color:blue; float:right; margin-top: -11px" href="{% url 'todo:delete_view_purpose' %}">
+                {% icon 'ban' %}
+            </a>
+        </div>
+        
+        {% if count_over > 0 %}
+            Past: {{count_over}}
+            <table class="table">
+                <thead>
+                <tr>
+                <th style="width: 2%" scope="col">#</th>
+                <th style="width: 86%" scope="col">Text</th>
+                <th style="width: 10%;" scope="col">Date</th>
+                <th style="width: 2%" scope="col>">Delete</th>
+                </tr>
+                </thead>
+                {% for purpose in list_over %}
+                    {% if purpose.who == request.user %}
+                        <tbody>
+                            <tr>
+                            <th>{{ forloop.counter }}</th>
+                                <td>{{ purpose.purpose_text }}</td>
+                                <td>{{ purpose.pub_date|date:"d/m/Y"}}</td>
+                                <td>
+                                <a style="font-size: 25px; color:silver; float: right; margin-top: -7px" href="{{ purpose.id }}/purpose/purpose_confirm_delete">
+                                    {% icon 'trash' %}
+                                </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endif %}
+
+        Future: {{ count_tocome }}
+        <table class="table">
+            <thead>
+            <tr>
+              <th style="width: 2%" scope="col">#</th>
+              <th style="width: 86%" scope="col">Text</th>
+              <th style="width: 10%;" scope="col">Date</th>
+              <th style="width: 2%" scope="col>">Delete</th>
+            </tr>
+            </thead>
+            {% for purpose in list_tocome %}
+                {% if purpose.who == request.user %}
+                    <tbody>
+                        <tr>
+                        <th>{{ forloop.counter }}</th>
+                            <td>{{ purpose.purpose_text }}</td>
+                            <td>{{ purpose.pub_date|date:"d/m/Y"}}</td>
+                            <td>
+                             <a style="font-size: 25px; color:silver; float: right; margin-top: -7px" href="{{ purpose.id }}/purpose/purpose_confirm_delete">
+                                {% icon 'trash' %}
+                             </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}
