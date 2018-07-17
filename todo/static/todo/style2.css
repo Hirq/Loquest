@@ -1,0 +1,66 @@
+body {
+    background-color: #071422;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.container-fluid {
+    flex:1;
+
+}
+.container {
+    color: aliceblue;
+}
+
+#equal {
+    width: 400px
+
+}
+.flash {
+    min-width: 30px;
+    min-height: 30px;
+    fill: red;
+}
+.flash:hover {
+  fill: orange;
+}
+
+
+#logo {
+    max-width: 50px;
+    max-height: 35px;
+    float: left;
+    margin: 35px 0px 0px 40px;
+
+
+}
+
+#menu {
+    float: right;
+    padding: 35px 30px 0px 0px;
+}
+
+.well-sm {
+    padding: 12px;
+    border-radius: 35px;
+}
+
+.add_log {
+    margin-left: 40%;
+}
+
+#delete_quest {
+    display: inline-block;
+    float: right;
+}
+
+footer {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+}
