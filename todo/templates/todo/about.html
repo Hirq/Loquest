@@ -1,9 +1,10 @@
-   {% extends 'todo/base.html' %}
+{% extends 'todo/base.html' %}
 {% block content %}
     <div class="container" style="width: 600px">
         <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
          About
         </div>
+
         <h3>Przykład pisania logów do zadań na podstawie rozbudowy tej aplikacji</h3>
         <h1> Log 1</h1>
         <h5>Page was written in framework Django for help in learn English language. </h5>
@@ -15,6 +16,7 @@
         <br>
         <h8>Red - HARD</h8>
         <h1>Log 2</h1>
+
         <h5>Strona jednak będzie służyć do zapisywania codziennych oraz długo okresowych zadań, poziomy zadań możemy oznaczyć wyżej wymionionymi kolorami
         Można dodawać wpisy odnoście obecnego stanu zadania.
         </h5>
@@ -25,9 +27,10 @@
             Dodana sekcja Purpose - Jako funkcja kalendarza - zapis nadchodzących wydarzeń.
             Dodano również wyszukiwarkę do wszystkich sekcji.
         </h5>
-        
-
-        
-        
-        <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:index' %}">Back to quests list</a>
+                <h4>Strona ma służyć do zapisywania codziennych oraz długo okresowych zadań, poziomy zadań możemy oznaczyć wyżej wymionionymi kolorami
+        Można dodawać wpisy odnoście obecnego stanu zadania.
+        </h4>
+    
+            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="{% url 'todo:index' %}">Back to quests list</a>
+    </div>
 {% endblock %}
