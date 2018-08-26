@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 import datetime
 from .models import Quest, Choice, Victory, Purpose
-from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm, UpdateFormLog
+from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm, UpdateFormLog, DoneForm
 import copy
 from django.contrib.auth.decorators import login_required
 from .filters import QuestFilter, VictoryFilter, PurposeFilter
@@ -111,6 +111,14 @@ def NewLog(request, quest_id):
 class DoneQuest(UpdateView):
     model = Quest
     form_class = UpdateForm
+
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('todo:index')
+
+
+class DoneQuest2(UpdateView):
+    model = Quest
+    form_class = DoneForm
 
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('todo:index')
@@ -282,11 +290,6 @@ def DeleteDailyQuests(request):
     quests = Quest.objects.filter(daily_quest=True, today_quest=False, done_quest=False, who=current_user)
     quests.delete()
     return render(request, 'todo/confirmation.html')
-
-
-
-
-
 
 
 

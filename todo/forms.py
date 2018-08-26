@@ -63,7 +63,7 @@ class PurposeForm(forms.ModelForm):
 class UpdateForm(forms.ModelForm):
     class Meta:
         model = Quest
-        fields = ['quest_name', 'quest_text', 'levels', 'done_date', 'done_quest']
+        fields = ['quest_name', 'quest_text', 'levels']
 
     def __init__(self, *args, **kwargs):
         super(UpdateForm, self).__init__(*args, **kwargs)
@@ -76,9 +76,19 @@ class UpdateForm(forms.ModelForm):
         self.fields['levels'].widget.attrs.update({
             'class': 'form-control',
             'name': 'levels'})
+
+
+class DoneForm(forms.ModelForm):
+    class Meta:
+        model = Quest
+        fields = ['done_date', 'done_quest']
+
+    def __init__(self, *args, **kwargs):
+        super(DoneForm, self).__init__(*args, **kwargs)
         self.fields['done_date'].widget.attrs.update({
             'class': 'form-control',
             'name': 'done_date'})
+
 
 class UpdateFormLog(forms.ModelForm):
     class Meta:
