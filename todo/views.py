@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 import datetime
 from .models import Quest, Choice, Victory, Purpose
-from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm
+from .forms import QuestForm, LogForm, VictoryForm, UpdateForm, PurposeForm, UpdateFormLog
 import copy
 from django.contrib.auth.decorators import login_required
 from .filters import QuestFilter, VictoryFilter, PurposeFilter
@@ -119,8 +119,21 @@ class DoneQuest(UpdateView):
         return {'done_quest': True, 'done_date': timezone.now()}
 
 
+class UpdateLog(UpdateView):
+    model = Choice
+    form_class = UpdateFormLog
+
+    template_name_suffix = '_update_log_form'
+    success_url = reverse_lazy('todo:index')
+
+
 class DeleteQuest(DeleteView):
     model = Quest
+    success_url = reverse_lazy('todo:index')
+
+
+class DeleteLog(DeleteView):
+    model = Choice
     success_url = reverse_lazy('todo:index')
 
 
@@ -301,8 +314,8 @@ class PurposeList(generic.ListView):
 
             context['count_over'] = date_over_count
             context['count_tocome'] = date_tocome_count
-            context['list_over'] = date_over[::-1]
-            context['list_tocome'] = date_tocome[::-1]
+            context['list_over'] = date_over.order_by('pub_date')[::-1]
+            context['list_tocome'] = date_tocome.order_by('pub_date')[::1]
         return context
 
 

@@ -1,0 +1,131 @@
+body {
+    background-color: #071422;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.container-fluid {
+    flex:1;
+
+}
+.container {
+    color: aliceblue;
+}
+
+#equal {
+    width: 400px
+
+}
+.flash {
+    min-width: 30px;
+    min-height: 30px;
+    fill: red;
+}
+.flash:hover {
+  fill: orange;
+}
+
+
+#logo {
+    max-width: 50px;
+    max-height: 35px;
+    float: left;
+    margin: 35px 0px 0px 40px;
+
+
+}
+
+#menu {
+    float: right;
+    padding: 35px 30px 0px 0px;
+}
+
+.well-sm {
+    padding: 12px;
+    border-radius: 35px;
+}
+
+.add_log {
+    margin-left: 40%;
+}
+
+#delete_quest {
+    display: inline-block;
+    float: right;
+}
+
+footer {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+  
+  .panel-default>.panel-heading a {
+    display: block;
+    padding: 10px 15px;
+  }
+  
+  .panel-default>.panel-heading a:after {
+    content: "";
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float: right;
+    transition: transform .25s linear;
+    -webkit-transition: -webkit-transform .25s linear;
+  }
+  
+  
+  .panel-default>.panel-heading a[aria-expanded="true"]:after {
+    content: "\2212";
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  
+  .panel-default>.panel-heading a[aria-expanded="false"]:after {
+    content: "\002b";
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  
+  .accordion-option {
+    width: 100%;
+    float: left;
+    clear: both;
+    margin: 15px 0;
+  }
+  
+  .accordion-option .title {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .accordion-option .toggle-accordion {
+    float: right;
+    font-size: 16px;
+    color: #6a6c6f;
+  }
+  
+  .accordion-option .toggle-accordion:before {
+    content: "Expand All";
+  }
+  
+  .accordion-option .toggle-accordion.active:before {
+    content: "Collapse All";
+  }

@@ -1,71 +1,109 @@
 {% extends 'todo/base.html' %}
 {% block content %}
+{% load icons %}
+
+
     <div class="container">
-    <ul style="display: table-cell; ">
+        <ul style="display: table-cell; ">
 
-        <div class="well well-sm text-center"  style="min-width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-            <h4>Name</h4>
-        </div>
-        <div style="display: inline-block;">
+            <div class="well well-sm text-center"  style="width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+                <h4>Name</h4>
+            </div>
+            <div style="display: inline-block;">
 
-            <h3>{{ quest.quest_name }} </h3>
-            <!--<h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>-->
-        </div>
-        <div class="well well-sm text-center"  style="min-width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
-            <h4>Info</h4>
-        </div>
+                <h3>{{ quest.quest_name }} </h3>
+                <!--<h3>WHO: {{ quest.who }} {{ quest.who_id }}</h3>-->
+            </div>
+            <div class="well well-sm text-center"  style="width: 300px; background-color: #0B2849; color: aliceblue; margin: 15px 5px 0 5px;">
+                <h4>Info</h4>
+            </div>
 
-        <div>
-            <h5>Date: {{ quest.pub_date }}</h5>
-            <h5>Level: {{ quest.levels }}</h5>
-            {% if quest.done_date != None %}
-                <h5>Done: {{ quest.done_date }}</h5>
-            {% endif %}
-        </div>
+            <div>
+                <h5>Date: {{ quest.pub_date }}</h5>
+                <h5>Level: {{ quest.levels }}</h5>
+                {% if quest.done_date != None %}
+                    <h5>Done: {{ quest.done_date }}</h5>
+                {% endif %}
+            </div>
 
-        <hr/>
+            <hr/>
 
-            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_update_form">Done</a>
-            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="choice_form">Add Log</a>
-            <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_confirm_delete">Delete this Quest</a>
+                <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="choice_form">Add Log</a>
+                <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_update_form">Edit</a>
+                <a class="btn btn-lg btn-primary btn-block" style="background-color: #0B2849; color: aliceblue; margin: 10px 5px 20px 5px;" href="quest_confirm_delete">Delete this Quest</a>
+        </ul>
 
-    </ul>
+        <ul style="display: table-cell; width: 750px">
 
-    <ul style="display: table-cell; min-width: 750px">
-
-        <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
-                    <h4>Text</h4>
-        </div>
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-        <h4>{{ quest.quest_text|linebreaks }}</h4>
-
-        {% for choice in quest.choice_set.all %}
             <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
+                <div style="float:left; ">
+                        <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion">
+                            {% icon 'reorder' %}
+                        </a>
+                        <a href="javascript:void(0)" class="toggle-accordion2 active" accordion-id="#accordion">
+                            {% icon 'reply' %}
+                        </a>
+                </div>
+                <h4>Text</h4>
+                        
+            </div>
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
 
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ choice.id }}">
-                            Log: {{ forloop.counter }}</a>
-                        </h4>
-                    </div>
-                    <div id="collapse{{ choice.id }}" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            {{ choice.choice_text|linebreaks }}
-                            <br>
-                            {{ choice.pub_date }}
+            <h4 class="panel-title"></h4>
+            <h4>{{ quest.quest_text|linebreaks }}</h4>
+            
+            {% for choice in quest.choice_set.all %}
+
+                <div class="well well-sm text-center" style="background-color: #0B2849; color: aliceblue; margin: 15px 25px 0 5px;">
+
+                    <div class="panel-group" id="accordion">
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading" >
+                                    <a style="float:left" href="{% url 'todo:log_update_form'  choice.id   %}">
+                                            {% icon 'envelope-open' %}
+
+                                    </a>
+                                    <a style="float:left" href="{% url 'todo:choice_confirm_delete'  choice.id   %}">
+                                            {% icon 'trash' %}
+
+                                    </a>
+                                    
+
+                                    
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ choice.id }}">
+                                    Log: {{ forloop.counter }}</a>
+
+
+                                
+                            </div>
+
+                            <div id="collapse{{ choice.id }}" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    {{ choice.choice_text|linebreaks }}
+                                    <br>
+                                    {{ choice.pub_date }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-        {% endfor %}
+            {% endfor %}
 
-    </ul>
+
+
+            <!-- DRUGI -->
+
+
+
+
+
+
+        </ul>
     </div>
 
 {% endblock %}

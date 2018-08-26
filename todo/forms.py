@@ -63,4 +63,30 @@ class PurposeForm(forms.ModelForm):
 class UpdateForm(forms.ModelForm):
     class Meta:
         model = Quest
-        fields = ['done_quest', 'done_date']
+        fields = ['quest_name', 'quest_text', 'levels', 'done_date', 'done_quest']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateForm, self).__init__(*args, **kwargs)
+        self.fields['quest_name'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'quest_name'})
+        self.fields['quest_text'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'quest_text'})
+        self.fields['levels'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'levels'})
+        self.fields['done_date'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'done_date'})
+
+class UpdateFormLog(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['choice_text']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateFormLog, self).__init__(*args, **kwargs)
+        self.fields['choice_text'].widget.attrs.update({
+            'class': 'form-control',
+            'name': 'choice_text'})

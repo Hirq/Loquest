@@ -12,8 +12,10 @@ urlpatterns = [
     path('quest_form', views.NewQuest, name='create_quest'),
     path('quest_form_today', views.NewTodayQuest, name='create_quest_today'),
     path('<int:quest_id>/choice_form/', views.NewLog, name='create_log'),
+    path('<int:pk>/choice_update_form/', views.UpdateLog.as_view(), name='log_update_form'),
     path('<int:pk>/quest_update_form/', views.DoneQuest.as_view(), name='quest_update_form'),
 
+    path('<int:pk>/choice_confirm_delete/', views.DeleteLog.as_view(), name='choice_confirm_delete'),
     path('<int:pk>/quest_confirm_delete/', views.DeleteQuest.as_view(), name='quest_confirm_delete'),
     path('delete_today_quest_done', views.DeleteTodayQuestsDone, name='delete_today_quests_done'),
     path('delete_all_quests', views.DeleteAllQuests, name='delete_all_quests'),
